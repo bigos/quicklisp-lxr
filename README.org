@@ -1,1 +1,22 @@
-This is the stub README.txt for the "quicklisp-lxr" project.
+* Quicklisp-LXR
+
+** Inspired by
+https://en.wikipedia.org/wiki/LXR_Cross_Referencer
+
+** Essential Lisp code
+http://www.cs.cmu.edu/Groups/AI/util/lang/lisp/code/tools/xref/0.html
+
+** Features
+work in progress..
+
+*** need good..
+
+**** cross referencing and indexing
+
+**** Good htmlization
+
+**** Something so you can see where and how a project is used in the wild.
+
+**** Beautiful display and clickable everything.
+**** Good index and cross reference UI.
+**** Something you can explore and enjoy.
