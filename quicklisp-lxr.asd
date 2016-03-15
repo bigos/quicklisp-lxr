@@ -9,6 +9,7 @@
   :components ((:file "package")
                (:file "quicklisp-lxr")
                (:module "xref"
+                        :pathname "xref"
                         :components ((:file "xref")))
-               (:file)
+
                ))
