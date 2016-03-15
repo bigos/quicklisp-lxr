@@ -2,15 +2,28 @@
 
 (in-package #:quicklisp-lxr)
 
-;;; "quicklisp-lxr" goes here. Hacks and glory await!
-
+(defvar *quicklisp-software-folder* (concatenate 'string
+                                                 (directory-namestring
+                                                  (user-homedir-pathname))
+                                                 "quicklisp/dists/quicklisp/software/"))
+(defun folder-content ()
+  (cl-fad:list-directory quicklisp-lxr::*quicklisp-software-folder*))
 
 (restas:define-module #:restas.hello-world
-    (:use :cl))
+  (:use :cl))
 
 (in-package #:restas.hello-world)
 
 (restas:define-route main ("")
-  "<h1>Hello world!</h1>")
+  (who:with-html-output-to-string (out)
+    (:html
+     (:body
+      (:h1 "Hello everyone!")
+      (:p (format out "directory listning of ~A"
+                  quicklisp-lxr::*quicklisp-software-folder*))
+      (:p (loop for f in (quicklisp-lxr::folder-content) do
+               (format out "~a<br>" f)
+               ))
+      ))))
 
-(restas:start '#:restas.hello-world :port 8080)
+;; (restas:start '#:restas.hello-world :port 8080)
