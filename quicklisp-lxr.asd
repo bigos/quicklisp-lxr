@@ -2,9 +2,13 @@
 
 (asdf:defsystem #:quicklisp-lxr
   :description "Describe quicklisp-lxr here"
-  :author "Your Name <your.name@example.com>"
-  :license "Specify license here"
+  :author "Jacek Podkanski <ruby.object@googlemail.com>"
+  :license "GPLv3, except xref.lisp file"
+  :depends-on (:restas :cl-fad :parenscript :cl-who)
   :serial t
   :components ((:file "package")
-               (:file "quicklisp-lxr")))
-
+               (:file "quicklisp-lxr")
+               (:module "xref"
+                        :components ((:file "xref")))
+               (:file)
+               ))
