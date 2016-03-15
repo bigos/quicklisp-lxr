@@ -1,0 +1,14 @@
+p{line-height: 125%;
+   color: #131;
+}
+
+body{background: #eeffcc;
+     font-family: arial;}
+
+footer{color: white;
+       text-align: center; background:#363;
+       margin-top:1em; }
+
+.my-info{background: #c0d8FF;
+         padding: 1em;
+}
