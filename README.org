@@ -14,6 +14,11 @@ http://www.cs.cmu.edu/Groups/AI/util/lang/lisp/code/tools/xref/0.html
 + Good index and cross reference UI.
 + Something you can explore and enjoy.
 
+** Linux xref examples
+http://linux.die.net/man/3/xref
+
+
+
 * Framework to use
 Restas
 https://github.com/archimag/restas

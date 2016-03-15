@@ -14,6 +14,16 @@
 
 (in-package #:restas.hello-world)
 
+;;; make sure we have log folder
+(ensure-directories-exist #P"/tmp/hunchentoot/")
+
+;;; specify log destination
+(defclass acceptor (restas:restas-acceptor)
+  ()
+  (:default-initargs
+   :access-log-destination #P"/tmp/hunchentoot/access_log"
+   :message-log-destination #P"/tmp/hunchentoot/error_log"))
+
 (restas:define-route main ("")
   (who:with-html-output-to-string (out)
     (:html
@@ -22,8 +32,10 @@
       (:p (format out "directory listning of ~A"
                   quicklisp-lxr::*quicklisp-software-folder*))
       (:p (loop for f in (quicklisp-lxr::folder-content) do
-               (format out "~a<br>" f)
+               (who:htm
+                (:span (format out "~A" f))
+                (:br))
                ))
       ))))
 
-;; (restas:start '#:restas.hello-world :port 8080)
+(restas:start '#:restas.hello-world :port 8080  :acceptor-class 'acceptor)
