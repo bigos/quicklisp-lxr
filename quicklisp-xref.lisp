@@ -1,18 +1,14 @@
-;;;; quicklisp-lxr.lisp
+(restas:define-module #:restas.xref
+  (:use :cl))
 
-(in-package #:quicklisp-lxr)
+(in-package #:restas.xref)
 
 (defvar *quicklisp-software-folder* (concatenate 'string
                                                  (directory-namestring
                                                   (user-homedir-pathname))
                                                  "quicklisp/dists/quicklisp/software/"))
 (defun folder-content ()
-  (cl-fad:list-directory quicklisp-lxr::*quicklisp-software-folder*))
-
-(restas:define-module #:restas.hello-world
-  (:use :cl))
-
-(in-package #:restas.hello-world)
+  (cl-fad:list-directory *quicklisp-software-folder*))
 
 ;;; make sure we have log folder
 (ensure-directories-exist #P"/tmp/hunchentoot/")
@@ -30,12 +26,12 @@
      (:body
       (:h1 "Hello everyone!")
       (:p (format out "directory listning of ~A"
-                  quicklisp-lxr::*quicklisp-software-folder*))
-      (:p (loop for f in (quicklisp-lxr::folder-content) do
+                  *quicklisp-software-folder*))
+      (:p (loop for f in (folder-content) do
                (who:htm
                 (:span (format out "~A" f))
                 (:br))
-               ))
-      ))))
+               (loop for i in (cl-fad:list-directory f do
+                                                     ))))))))
 
 (restas:start '#:restas.hello-world :port 8080  :acceptor-class 'acceptor)

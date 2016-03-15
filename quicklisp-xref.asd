@@ -1,13 +1,13 @@
-;;;; quicklisp-lxr.asd
+;;;; quicklisp-xref.asd
 
-(asdf:defsystem #:quicklisp-lxr
+(asdf:defsystem #:quicklisp-xref
   :description "Describe quicklisp-lxr here"
   :author "Jacek Podkanski <ruby.object@googlemail.com>"
   :license "GPLv3, except xref.lisp file"
-  :depends-on (:restas :cl-fad :parenscript :cl-who)
+  :depends-on (:hunchentoot :cl-fad :parenscript :cl-who)
   :serial t
   :components ((:file "package")
-               (:file "quicklisp-lxr")
+               (:file "quicklisp-xref")
                (:module "xref"
                         :pathname "xref"
                         :components ((:file "xref")))
