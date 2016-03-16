@@ -7,6 +7,7 @@
   :depends-on (:hunchentoot :cl-fad :parenscript :cl-who)
   :serial t
   :components ((:file "package")
+               (:file "config")
                (:file "quicklisp-xref")
                (:module "xref"
                         :pathname "xref"
