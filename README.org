@@ -19,13 +19,13 @@ http://linux.die.net/man/3/xref
 
 * Running
 
-** git clone the repo
++ git clone the repo
 
-** add it to your quicklisp local projects
++ add it to your quicklisp local projects
 
-** edit folder paths in the config.lisp file
++ edit folder paths in the config.lisp file
 
-** start slime and run following
++ start slime and run following
 
 #+BEGIN_EXAMPLE
 CL-USER> (ql:quickload :quicklisp-xref)
@@ -40,7 +40,7 @@ CL-USER> (in-package :quicklisp-xref)
 QUICKLISP-XREF> (run)
 #+END_EXAMPLE
 
-** and visit
++ and visit
 http://localhost:5000/
 
 * finding relevant info
