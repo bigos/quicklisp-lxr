@@ -23,6 +23,8 @@ http://linux.die.net/man/3/xref
 
 ** add it to your quicklisp local projects
 
+** edit folder paths in the config.lisp file
+
 ** start slime and run following
 
 #+BEGIN_EXAMPLE
