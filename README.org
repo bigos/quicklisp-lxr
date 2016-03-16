@@ -24,6 +24,8 @@ http://linux.die.net/man/3/xref
 ** add it to your quicklisp local projects
 
 ** start slime and run following
+
+#+BEGIN_EXAMPLE
 CL-USER> (ql:quickload :quicklisp-xref)
 To load "quicklisp-xref":
   Load 1 ASDF system:
@@ -34,6 +36,7 @@ To load "quicklisp-xref":
 CL-USER> (in-package :quicklisp-xref)
 #<PACKAGE "QUICKLISP-XREF">
 QUICKLISP-XREF> (run)
+#+END_EXAMPLE
 
 ** and visit
 http://localhost:5000/
