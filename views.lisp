@@ -28,7 +28,7 @@
          (who:htm
           (:h3 (who:fmt "~a" (last-folder-part f)))
           (:div
-           (loop for i in (cl-fad:list-directory f) do
+           (loop for i in (cl-fad:list-directory f) do ;need recursive search instead
                 (who:htm
                  (:span (who:fmt "~A" i))
                  (:br))))))))
