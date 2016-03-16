@@ -1,9 +1,12 @@
+(in-package :quicklisp-xref)
+
 (defparameter *separator* #\/)
 
-(defparameter *application-directory* (concatenate 'string
-                                             (directory-namestring
-                                              (user-homedir-pathname))
-                                             "Programming/quicklisp-xref/"))
+;; (defparameter *application-directory* (concatenate 'string
+;;                                              (directory-namestring
+;;                                               (user-homedir-pathname))
+;;                                              "Programming/quicklisp-xref/"))
+(defvar *application-directory* (asdf:system-source-directory :quicklisp-xref))
 
 (defparameter *quicklisp-software-folder* (concatenate 'string
                                                  (directory-namestring
