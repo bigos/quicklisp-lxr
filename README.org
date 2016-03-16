@@ -16,3 +16,24 @@ http://www.cs.cmu.edu/Groups/AI/util/lang/lisp/code/tools/xref/0.html
 
 ** Linux xref examples
 http://linux.die.net/man/3/xref
+
+* Running
+
+** git clone the repo
+
+** add it to your quicklisp local projects
+
+** start slime and run following
+CL-USER> (ql:quickload :quicklisp-xref)
+To load "quicklisp-xref":
+  Load 1 ASDF system:
+    quicklisp-xref
+; Loading "quicklisp-xref"
+...............
+(:QUICKLISP-XREF)
+CL-USER> (in-package :quicklisp-xref)
+#<PACKAGE "QUICKLISP-XREF">
+QUICKLISP-XREF> (run)
+
+** and visit
+http://localhost:5000/

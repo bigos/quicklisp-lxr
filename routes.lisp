@@ -3,10 +3,7 @@
 ;;; Routes
 (push
  (hunchentoot:create-static-file-dispatcher-and-handler
-  "/style.css" (merge-pathnames (concatenate 'string
-                                             (directory-namestring
-                                              (user-homedir-pathname))
-                                             "Programming/quicklisp-xref/style.css")))
+  "/style.css" (merge-pathnames *application-directory* "style.css"))
  hunchentoot:*dispatch-table*)
 
 ;;; not using JS yet
