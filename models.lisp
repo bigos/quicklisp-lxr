@@ -21,3 +21,9 @@ divided by ONE delimiter character"
              (loop for s in (quicklisp:system-list)
                 for z = (slot-value s 'ql-dist:name)
                 collect (ql:where-is-system z))))
+
+(defun asd-files ()
+  (loop for s in (quicklisp:system-list)
+     for z = (slot-value s 'ql-dist:name)
+     for r = (slot-value s 'ql-dist:release)
+     collect (list z (slot-value r 'ql-dist:system-files))))
