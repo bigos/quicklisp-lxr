@@ -42,3 +42,23 @@ QUICKLISP-XREF> (run)
 
 ** and visit
 http://localhost:5000/
+
+* finding relevant info
+
+all systems
+#+BEGIN_EXAMPLE
+(quicklisp:system-list)
+#+END_EXAMPLE
+
+systems not installed locally
+#+BEGIN_EXAMPLE
+CL-USER> (ql:where-is-system :1am)
+NIL
+#+END_EXAMPLE
+
+
+systems installed locally
+#+BEGIN_EXAMPLE
+CL-USER> (ql:where-is-system :md5)
+#P"/home/user/quicklisp/dists/quicklisp/software/md5-20150804-git/"
+#+END_EXAMPLE
