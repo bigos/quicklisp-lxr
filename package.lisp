@@ -1,5 +1,7 @@
 ;;;; package.lisp
 
-(defpackage #:quicklisp-lxr
+(defpackage #:quicklisp-xref
   (:use #:cl))
 
+(defpackage #:xref
+  (:use #:cl))
