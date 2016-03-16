@@ -56,9 +56,14 @@ CL-USER> (ql:where-is-system :1am)
 NIL
 #+END_EXAMPLE
 
-
 systems installed locally
 #+BEGIN_EXAMPLE
 CL-USER> (ql:where-is-system :md5)
 #P"/home/user/quicklisp/dists/quicklisp/software/md5-20150804-git/"
+#+END_EXAMPLE
+
+system files
+#+BEGIN_EXAMPLE
+QUICKLISP-XREF> (slot-value (slot-value  (nth 31 (ql:system-list)) 'ql-dist:release) 'ql-dist:system-files)
+("anaphora.asd")
 #+END_EXAMPLE
