@@ -1,4 +1,4 @@
-* Quicklisp-LXR
+* Quicklisp-XREF
 
 ** Inspired by
 https://en.wikipedia.org/wiki/LXR_Cross_Referencer
@@ -16,9 +16,3 @@ http://www.cs.cmu.edu/Groups/AI/util/lang/lisp/code/tools/xref/0.html
 
 ** Linux xref examples
 http://linux.die.net/man/3/xref
-
-
-
-* Framework to use
-Restas
-https://github.com/archimag/restas

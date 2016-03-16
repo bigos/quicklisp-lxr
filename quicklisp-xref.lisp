@@ -1,37 +1,37 @@
-(restas:define-module #:restas.xref
-  (:use :cl))
+(in-package #:quicklisp-xref)
 
-(in-package #:restas.xref)
+;;; Instantiate VHOSTs
+(defvar vhost1 (make-instance 'hunchentoot:easy-acceptor :port 5000))
 
-(defvar *quicklisp-software-folder* (concatenate 'string
-                                                 (directory-namestring
-                                                  (user-homedir-pathname))
-                                                 "quicklisp/dists/quicklisp/software/"))
-(defun folder-content ()
-  (cl-fad:list-directory *quicklisp-software-folder*))
+;;; Start and Stop
+(defun run ()
+  (hunchentoot:start vhost1))
 
-;;; make sure we have log folder
-(ensure-directories-exist #P"/tmp/hunchentoot/")
+(defun stop ()
+  (hunchentoot:stop vhost1))
 
-;;; specify log destination
-(defclass acceptor (restas:restas-acceptor)
-  ()
-  (:default-initargs
-   :access-log-destination #P"/tmp/hunchentoot/access_log"
-   :message-log-destination #P"/tmp/hunchentoot/error_log"))
+;;; make parenscript work nicely with cl-who
+(setf parenscript:*js-string-delimiter* #\")
 
-(restas:define-route main ("")
-  (who:with-html-output-to-string (out)
-    (:html
-     (:body
-      (:h1 "Hello everyone!")
-      (:p (format out "directory listning of ~A"
-                  *quicklisp-software-folder*))
-      (:p (loop for f in (folder-content) do
-               (who:htm
-                (:span (format out "~A" f))
-                (:br))
-               (loop for i in (cl-fad:list-directory f do
-                                                     ))))))))
+;;; helpers
+(defmacro escaped-string (string)
+  `(who:fmt (who:escape-string (format nil "~A" ,string))))
 
-(restas:start '#:restas.hello-world :port 8080  :acceptor-class 'acceptor)
+
+(defun inspect-object (obj)
+  (loop for the-slot in (mapcar #'sb-pcl:slot-definition-name (sb-pcl:class-slots (class-of obj)))
+     collect (list the-slot  (if (slot-boundp obj the-slot)
+                                 (slot-value obj the-slot)
+                                 "unbound"))))
+
+;;; pretty print object on a web page
+(defun pp-object (obj)
+  (with-output-to-string (str)
+    (format str "<pre>")
+    (format str "~a" (who:escape-string (format nil "~a~%" obj)))
+    (loop for the-slot in (mapcar #'sb-pcl:slot-definition-name (sb-pcl:class-slots (class-of obj)))
+       do
+         (format str "~A~%" (who:escape-string (format nil "~A" (list the-slot  (if (slot-boundp obj the-slot)
+                                                                                    (slot-value obj the-slot)
+                                                                                    "unbound"))))))
+    (format str "</pre>")))

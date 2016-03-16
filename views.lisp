@@ -9,14 +9,12 @@
       (:script :src "jquery-2.1.1.min.js")
       (:script :src "/javascript.js" ))
      (:body
-      (:h1 "In Layout")
+      (:h1 "Application Layout")
 
       (:div
-       (:a :href "/" "see the index")
+       (:a :href "/" "root")
        (:span :style "margin:0 2em;" "|")
-       (:a :href "/about_me?name=Jacek&language=Lisp" "info about me")
-       (:span :style "margin:0 2em;" "|")
-       (:a :href "/hunchentoot-doc.html" "Documentation"))
+       )
       (:hr))
 
      (who:fmt "~A" content)
@@ -24,6 +22,13 @@
 
 (defun home-page-view ()
   (who:with-html-output-to-string (out)
-    (:h1 "Welcome")
-    (:p "This is Home Page" )
-    (:a :href "/faa" "More")))
+    (:h1 "Quicklisp folder")
+    (:p (who:fmt "~A" *quicklisp-software-folder*))
+    (loop for f in (cl-fad:list-directory *quicklisp-software-folder*) do
+         (who:htm
+          (:h3 (who:fmt "~a" (last-folder-part f)))
+          (:div
+           (loop for i in (cl-fad:list-directory f) do
+                (who:htm
+                 (:span (who:fmt "~A" i))
+                 (:br))))))))

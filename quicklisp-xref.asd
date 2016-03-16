@@ -11,5 +11,8 @@
                (:module "xref"
                         :pathname "xref"
                         :components ((:file "xref")))
-
-               ))
+               (:file "routes")
+               (:file "models")
+               (:file "views")
+               (:file "controllers")
+               (:file "javascript")))
