@@ -15,11 +15,15 @@
      (:div
       (:a :href "/" "root")
       (:span :style "margin:0 2em;" "|")
+      (:a :href "/dists" "dists")
+      (:span :style "margin:0 2em;" "|")
       )
      (:hr))
 
     (who:fmt "~A" content)
-    (:footer "footer"))))
+    (:footer "footer")
+    (:p (who:fmt "~A" (pp-object hunchentoot:*request*)))
+    )))
 
 (defun home-page-view ()
   (who:with-html-output-to-string
@@ -34,3 +38,22 @@
                  (who:htm
                   (:span (who:fmt "~A" i))
                   (:br))))))))
+
+(defun dists-view ()
+  (who:with-html-output-to-string
+      (out)
+    (:h1 "Dists found on this system")
+    (:ul
+     (loop for d in (ql-dist:all-dists)
+        for id = 0 then (1+ id)
+        do
+          (who:htm
+           (:li
+            (:a :href (format nil "dist?id=~a" id) (who:fmt "~A" (ql-dist:name (nth id (ql-dist:all-dists)))))))))))
+
+(defun dist-view (dist-obj)
+  (who:with-html-output-to-string
+      (out)
+    (:h1 (who:fmt "Dist: ~A" 1))
+    (:p "todo")
+    (:p (who:fmt "~A" (pp-object dist-obj)))))
