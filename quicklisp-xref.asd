@@ -16,4 +16,5 @@
                (:file "models")
                (:file "views")
                (:file "controllers")
-               (:file "javascript")))
+               (:file "javascript")
+               (:file "htmlizer")))
