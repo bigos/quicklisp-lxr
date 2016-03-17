@@ -26,6 +26,18 @@
                                   (make-pathname :name (ql-dist:name dist)
                                                  :type "html")))
 
+(defun system-index (dist)
+  (let ((systems (ql-dist:provided-systems dist)))
+    (who:with-html-output-to-string (out)
+      (loop for s in systems
+         for sn = (ql-dist:name s)
+         for sh = (format nil "~a~A" "#" (hunchentoot:url-encode sn))
+         for sc = (if (ql:where-is-system sn) "installed" "absent")
+         do
+           (who:htm
+            (:a :href sh :class sc (who:fmt "~A" sn))
+            (who:fmt ", "))))))
+
 (defun htmlizer ()
   (let ((zero 0))
     (loop for dist in (ql-dist:all-dists)
@@ -44,6 +56,8 @@
                 (:p "distinfo goes here")
                 )
                (:h2 "systems")
+               (:div
+                (who:fmt "~a" (system-index dist)))
                (:h2 "detailed system info")
                (:footer (who:fmt "~a" (creation-date-time)))
                ))))
