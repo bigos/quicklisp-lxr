@@ -14,7 +14,9 @@
 
 (defun style-file-content ()
   (let ((data))
-    (with-open-file (stream "/etc/passwd")
+    (with-open-file (stream (cl-fad:merge-pathnames-as-file *application-directory*
+                                                            (make-pathname :name "style"
+                                                                           :type "css")))
       (setf data (make-string (file-length stream) :initial-element #\space))
       (read-sequence data stream))
     data))
@@ -42,6 +44,7 @@
                 (:p "distinfo goes here")
                 )
                (:h2 "systems")
+               (:h2 "detailed system info")
                (:footer (who:fmt "~a" (creation-date-time)))
                ))))
          (format t "~&created ~a~%" html-path))))
