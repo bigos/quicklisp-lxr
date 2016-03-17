@@ -51,9 +51,32 @@
            (:li
             (:a :href (format nil "dist?id=~a" id) (who:fmt "~A" (ql-dist:name (nth id (ql-dist:all-dists)))))))))))
 
-(defun dist-view (dist-obj)
+(defun dist-view (dist-obj systems)
   (who:with-html-output-to-string
       (out)
-    (:h1 (who:fmt "Dist: ~A" 1))
-    (:p "todo")
-    (:p (who:fmt "~A" (pp-object dist-obj)))))
+    (:h1 (who:fmt "Dist: ~A" (ql-dist:name dist-obj)))
+    (:p (who:fmt "version~A ~A" ":" (ql-dist:version dist-obj)))
+    ;; (:p (who:fmt "~A" (pp-object dist-obj)))
+    (:h2 "Systems")
+    (:p "installed systems are highlighted in blue and not installed in red")
+    (:div
+     (loop for s in systems
+        for sn = (ql-dist:name s)
+        for sh = (format nil "system?name=~A" (hunchentoot:url-encode sn))
+        for st = (if (ql:where-is-system sn) "color:blue;" "color:red;")
+        do
+          (who:htm
+           (:a :href sh :style st (who:fmt "~A" sn))
+           (who:fmt ", "))
+
+          )
+     (:p "done")
+     )))
+
+
+(defun system-view (system)
+  (who:with-html-output-to-string
+      (out)
+    (:h1 (who:fmt "System: ~A"  (ql-dist:name system)))
+    (:p (who:fmt "~A" (pp-object system)))
+    ))

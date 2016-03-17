@@ -20,6 +20,9 @@
 (hunchentoot:define-easy-handler (uri2 :uri "/dist") ()
   (dist))
 
+(hunchentoot:define-easy-handler (uri3 :uri "/system") ()
+  (system))
+
 ;; (hunchentoot:define-easy-handler (js1 :uri "/javascript.js") ()
 ;;   (setf (hunchentoot:content-type*) "text/javascript")
 ;;   (app-js))
