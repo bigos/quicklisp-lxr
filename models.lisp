@@ -27,3 +27,89 @@ divided by ONE delimiter character"
      for z = (slot-value s 'ql-dist:name)
      for r = (slot-value s 'ql-dist:release)
      collect (list z (slot-value r 'ql-dist:system-files))))
+
+
+;;; finding more
+;; QUICKLISP-XREF>  (slot-value  (nth 31 (ql:system-list)) 'ql-dist:release)
+;; #<QL-DIST:RELEASE anaphora-0.9.4 / quicklisp 2016-02-08>
+;; C-c C-d d on the above gives interesting info
+
+;;; slots of system
+;; (type-of (nth 31 (ql:system-list)))
+;; QL-DIST:SYSTEM
+;; SYSTEM names the standard-class #<STANDARD-CLASS QL-DIST:SYSTEM>:
+;;   Class precedence-list: QL-DIST:SYSTEM, QL-DIST::PREFERENCE-MIXIN,
+;;                          STANDARD-OBJECT, SB-PCL::SLOT-OBJECT, T
+;;   Direct superclasses: QL-DIST::PREFERENCE-MIXIN
+;;   No subclasses.
+;;   Direct slots:
+;;     QL-DIST:NAME
+;;       Initargs: :NAME
+;;       Readers: QL-DIST:SHORT-DESCRIPTION, QL-DIST:NAME
+;;       Writers: (SETF QL-DIST:NAME)
+;;     QL-DIST:SYSTEM-FILE-NAME
+;;       Initargs: :SYSTEM-FILE-NAME
+;;       Readers: QL-DIST:SYSTEM-FILE-NAME
+;;       Writers: (SETF QL-DIST:SYSTEM-FILE-NAME)
+;;     QL-DIST:RELEASE
+;;       Initargs: :RELEASE
+;;       Readers: QL-DIST:PREFERENCE-PARENT, QL-DIST:RELEASE
+;;       Writers: (SETF QL-DIST:RELEASE)
+;;     QL-DIST:DIST
+;;       Initargs: :DIST
+;;       Readers: QL-DIST:DIST
+;;       Writers: (SETF QL-DIST:DIST)
+;;     QL-DIST:REQUIRED-SYSTEMS
+;;       Initargs: :REQUIRED-SYSTEMS
+;;       Readers: QL-DIST:REQUIRED-SYSTEMS
+;;       Writers: (SETF QL-DIST:REQUIRED-SYSTEMS)
+;;     QL-DIST:METADATA-NAME
+;;       Initargs: :METADATA-NAME
+;;       Readers: QL-DIST:METADATA-NAME
+;;       Writers: (SETF QL-DIST:METADATA-NAME)
+
+;; also examine
+;; (slot-value (nth 31 (ql:system-list)) 'ql-dist:dist)
+;; (slot-value (nth 31 (ql:system-list)) 'ql-dist:release)
+
+;; note ::
+;; (slot-value (slot-value (nth 31 (ql:system-list)) 'ql-dist:dist) 'ql-dist::system-index)
+;; returns hash table?
+;; yes!!!
+
+;; (type-of (slot-value (slot-value (nth 31 (ql:system-list)) 'ql-dist:dist) 'ql-dist::system-index))
+;; HASH-TABLE
+
+;; iterating the hash table
+;; (maphash #'(lambda (k v) (format t "~&~A ~A~%" k v)) (slot-value (slot-value (nth 31 (ql:system-list)) 'ql-dist:dist) 'ql-dist::system-index))
+;; so system objects can be accessed by name!!!
+
+;; what is cdb in
+;; (ql-cdb:lookup )
+
+;; dists on the system
+;; (ql-dist:all-dists )
+;; (#<QL-DIST:DIST quicklisp 2016-02-08>)
+
+;; list of all release objects
+;; (ql-dist:provided-releases (car (ql-dist:all-dists)) )
+
+;; searching systems by name
+;; (ql-dist:system-apropos-list "babel")
+;; (ql:system-apropos-list "babel") <<- is this the same as above?
+;; (#<QL-DIST:SYSTEM babel / babel-20150608-git / quicklisp 2016-02-08>
+;;                   #<QL-DIST:SYSTEM babel-streams / babel-20150608-git / quicklisp 2016-02-08>
+;;                   #<QL-DIST:SYSTEM babel-tests / babel-20150608-git / quicklisp 2016-02-08>)
+
+;; list of all systems
+;; (ql-dist:system-apropos-list "")
+
+;; systems containing letter x in name
+;; (ql-dist:system-apropos-list "x")
+
+;; system dependencies
+;; (ql:who-depends-on "md5")
+;; ("bknr.modules" "bknr.utils" "bknr.web" "cl-mongo-id" "cl-postgres"
+;;                 "cl-scrobbler" "cl-xul" "cleric" "clickr" "clsql-helper"
+;;                 "clsql-postgresql-socket" "clsql-postgresql-socket3" "gravatar" "hunchentoot"
+;;                 "ixf" "nuclblog" "odesk" "tbnl" "toot")
