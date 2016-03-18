@@ -57,6 +57,10 @@ QUICKLISP-XREF> (run)
 + and visit
 http://localhost:5000/
 
+* Relevant projects
++ https://github.com/eudoxia0/docparser
++ https://github.com/eudoxia0/trivial-open-browser
+
 * finding relevant info
 
 all systems
