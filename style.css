@@ -2,7 +2,7 @@ p{line-height: 125%;
    color: #131;
 }
 
-body{background: #eeffcc;
+body{background: #cceecc;
      font-family: arial;}
 
 footer{color: white;
@@ -26,8 +26,11 @@ div.system-detail{
 .system-name {display:inline;
               margin-left:1em;}
 
-.absent-system{border:solid red 1px;}
-.installed-system{border: solid green 1px;}
+.absent-system{border:solid red 1px;
+               background:#ffffcc;}
+
+.installed-system{border: solid green 1px;
+                  background:#bbddff;}
 
 .header {background: white;
          height: 1.5em;
