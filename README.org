@@ -19,10 +19,8 @@ http://www.cs.cmu.edu/Groups/AI/util/lang/lisp/code/tools/xref/0.html
 + Good index and cross reference UI.
 + Something you can explore and enjoy.
 
-** Linux xref examples
+** Linux xref example
 http://lxr.free-electrons.com/source
-
-http://linux.die.net/man/3/xref
 
 * Running HTMLizer
 This will generate a static html file.
