@@ -26,6 +26,13 @@
                                   (make-pathname :name (ql-dist:name dist)
                                                  :type "html")))
 
+(defun dist-info (dist)
+  (who:with-html-output-to-string (out)
+    (:p (who:fmt "base directory: ~a" (ql-dist:base-directory dist)))
+    (:p (who:fmt "version: ~a" (ql-dist:version dist)))
+    (:p (who:fmt "~a"
+                 (pp-object dist)))))
+
 (defun system-index (dist)
   (let ((systems (ql-dist:provided-systems dist)))
     (who:with-html-output-to-string (out)
@@ -72,7 +79,7 @@
                (:a :name "top")
                (:h1 (who:fmt (ql-dist:name dist)))
                (:div
-                (:p "distinfo goes here")
+                (:p (who:fmt "~a" (dist-info dist)))
                 )
                (:h2 "systems")
                (:div
