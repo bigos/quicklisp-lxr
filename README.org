@@ -20,6 +20,8 @@ http://www.cs.cmu.edu/Groups/AI/util/lang/lisp/code/tools/xref/0.html
 + Something you can explore and enjoy.
 
 ** Linux xref examples
+http://lxr.free-electrons.com/source
+
 http://linux.die.net/man/3/xref
 
 * Running HTMLizer
