@@ -58,6 +58,7 @@
          for my-required-systems = (ql-dist:required-systems s)
          for who-depends = (ql:who-depends-on name)
          do
+           (format t " . ~a " name)
            (who:htm
             (:div :class div-class
                   (:div :class "header"
@@ -66,12 +67,23 @@
                         (:h3 :class "system-name" (who:fmt "~a" name)))
                   (:p (who:fmt "installed: ~a" installed))
                   (:p (who:fmt "system files: ~a" my-system-files))
-                  (:p (who:fmt "required systems: ~a" my-required-systems))
-                  (:p (who:fmt "who depends: ~a" who-depends))
+                  (:p (who:fmt "required systems: ~a" (links-to-systems my-required-systems)))
+                  (:p (who:fmt "who depends: ~a" (links-to-systems who-depends)))
                   (:p (who:fmt "~A" (pp-object s))
                       )
                   (:div :class "clearfix"))
             )))))
+
+(defun links-to-systems (names)
+  (if names
+      (who:with-html-output-to-string (out)
+        (loop for n in names
+             for target = (format nil "#~a" n)
+           do
+             (who:htm
+              (:a :href target (who:fmt "~a" n))
+              ", ")))
+      "NONE"))
 
 (defun htmlizer ()
   (let ((zero 0))
