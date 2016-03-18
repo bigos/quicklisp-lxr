@@ -1,4 +1,9 @@
 * Quicklisp-XREF
+This is work in progress. At the moment I can only cross reference quicklisp metadata.
+
+The next step would be getting recursive list of files for each system and generating relevant cross referenced, annotated file views.
+
+It is going to be a difficult job.
 
 ** Inspired by
 https://en.wikipedia.org/wiki/LXR_Cross_Referencer
