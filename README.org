@@ -17,7 +17,16 @@ http://www.cs.cmu.edu/Groups/AI/util/lang/lisp/code/tools/xref/0.html
 ** Linux xref examples
 http://linux.die.net/man/3/xref
 
-* Running
+* Running HTMLizer
+This will generate a static html file.
+
+#+BEGIN_EXAMPLE
+CL-USER> (ql:quickload :quicklisp-xref)
+CL-USER> (in-package :quicklisp-xref)
+QUICKLISP-XREF> (htmlizer)
+#+END_EXAMPLE
+
+* Running sample web app
 
 + git clone the repo
 
