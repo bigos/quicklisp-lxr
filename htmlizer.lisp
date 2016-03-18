@@ -26,6 +26,13 @@
                                   (make-pathname :name (ql-dist:name dist)
                                                  :type "html")))
 
+(defun dist-info (dist)
+  (who:with-html-output-to-string (out)
+    (:p (who:fmt "base directory: ~a" (ql-dist:base-directory dist)))
+    (:p (who:fmt "version: ~a" (ql-dist:version dist)))
+    (:p (who:fmt "~a"
+                 (pp-object dist)))))
+
 (defun system-index (dist)
   (let ((systems (ql-dist:provided-systems dist)))
     (who:with-html-output-to-string (out)
@@ -44,17 +51,27 @@
       (loop for s in systems
          for name = (ql-dist:name s)
          for target = (format nil "~A~A" "" name)
+         for installed = (ql:where-is-system name)
+         for div-class = (format nil "~a ~a" "system-detail" (if installed "installed-system" "absent-system"))
+         for release = (ql-dist:release s)
+         for my-system-files = (slot-value release 'ql-dist:system-files )
+         for my-required-systems = (ql-dist:required-systems s)
+         for who-depends = (ql:who-depends-on name)
          do
            (who:htm
-            (:div :class "system-detail"
+            (:div :class div-class
                   (:div :class "header"
-                   (:a :href "#top" :class "top-link" "top")
-                   (:a :name target name)
-                   (:h3 :class "system-name" (who:fmt "~a" name)))
+                        (:a :href "#top" :class "top-link" "top")
+                        (:a :name target name)
+                        (:h3 :class "system-name" (who:fmt "~a" name)))
+                  (:p (who:fmt "installed: ~a" installed))
+                  (:p (who:fmt "system files: ~a" my-system-files))
+                  (:p (who:fmt "required systems: ~a" my-required-systems))
+                  (:p (who:fmt "who depends: ~a" who-depends))
                   (:p (who:fmt "~A" (pp-object s))
-                   )
-             (:div :class "clearfix")
-             ))))))
+                      )
+                  (:div :class "clearfix"))
+            )))))
 
 (defun htmlizer ()
   (let ((zero 0))
@@ -72,7 +89,7 @@
                (:a :name "top")
                (:h1 (who:fmt (ql-dist:name dist)))
                (:div
-                (:p "distinfo goes here")
+                (:p (who:fmt "~a" (dist-info dist)))
                 )
                (:h2 "systems")
                (:div
