@@ -38,6 +38,24 @@
             (:a :href sh :class sc (who:fmt "~A" sn))
             (who:fmt ", "))))))
 
+(defun system-details (dist)
+  (let ((systems (ql-dist:provided-systems dist)))
+    (who:with-html-output-to-string (out)
+      (loop for s in systems
+         for name = (ql-dist:name s)
+         for target = (format nil "~A~A" "" name)
+         do
+           (who:htm
+            (:div :class "system-detail"
+                  (:div :class "header"
+                   (:a :href "#top" :class "top-link" "top")
+                   (:a :name target name)
+                   (:h3 :class "system-name" (who:fmt "~a" name)))
+                  (:p (who:fmt "~A" (pp-object s))
+                   )
+             (:div :class "clearfix")
+             ))))))
+
 (defun htmlizer ()
   (let ((zero 0))
     (loop for dist in (ql-dist:all-dists)
@@ -51,6 +69,7 @@
                (:title (who:fmt (ql-dist:name dist)))
                (:style (who:fmt (style-file-content))))
               (:body
+               (:a :name "top")
                (:h1 (who:fmt (ql-dist:name dist)))
                (:div
                 (:p "distinfo goes here")
@@ -59,6 +78,8 @@
                (:div
                 (who:fmt "~a" (system-index dist)))
                (:h2 "detailed system info")
+               (:div
+                (who:fmt "~a" (system-details dist)))
                (:footer (who:fmt "~a" (creation-date-time)))
                ))))
          (format t "~&created ~a~%" html-path))))

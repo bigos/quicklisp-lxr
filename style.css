@@ -14,3 +14,22 @@ footer{color: white;
 }
 
 a.absent{color:red;}
+
+a.top-link{display:inline;
+           background:black;
+           color:white;
+           width:5em;}
+
+div.system-detail{border: solid green 1px;
+                  margin-bottom:1em;}
+
+.system-name {display:inline;
+              margin-left:1em;}
+
+.header {background: white;
+         height: 1.5em;
+        }
+
+.clearfix{
+  clear:both
+}
