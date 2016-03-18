@@ -51,17 +51,27 @@
       (loop for s in systems
          for name = (ql-dist:name s)
          for target = (format nil "~A~A" "" name)
+         for installed = (ql:where-is-system name)
+         for div-class = (format nil "~a ~a" "system-detail" (if installed "installed-system" "absent-system"))
+         for release = (ql-dist:release s)
+         for my-system-files = (slot-value release 'ql-dist:system-files )
+         for my-required-systems = (ql-dist:required-systems s)
+         for who-depends = (ql:who-depends-on name)
          do
            (who:htm
-            (:div :class "system-detail"
+            (:div :class div-class
                   (:div :class "header"
-                   (:a :href "#top" :class "top-link" "top")
-                   (:a :name target name)
-                   (:h3 :class "system-name" (who:fmt "~a" name)))
+                        (:a :href "#top" :class "top-link" "top")
+                        (:a :name target name)
+                        (:h3 :class "system-name" (who:fmt "~a" name)))
+                  (:p (who:fmt "installed: ~a" installed))
+                  (:p (who:fmt "system files: ~a" my-system-files))
+                  (:p (who:fmt "required systems: ~a" my-required-systems))
+                  (:p (who:fmt "who depends: ~a" who-depends))
                   (:p (who:fmt "~A" (pp-object s))
-                   )
-             (:div :class "clearfix")
-             ))))))
+                      )
+                  (:div :class "clearfix"))
+            )))))
 
 (defun htmlizer ()
   (let ((zero 0))

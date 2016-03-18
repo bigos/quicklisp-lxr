@@ -13,18 +13,21 @@ footer{color: white;
          padding: 1em;
 }
 
-a.absent{color:red;}
+a.absent{color:red; }
 
 a.top-link{display:inline;
            background:black;
            color:white;
            width:5em;}
 
-div.system-detail{border: solid green 1px;
+div.system-detail{
                   margin-bottom:1em;}
 
 .system-name {display:inline;
               margin-left:1em;}
+
+.absent-system{border:solid red 1px;}
+.installed-system{border: solid green 1px;}
 
 .header {background: white;
          height: 1.5em;
