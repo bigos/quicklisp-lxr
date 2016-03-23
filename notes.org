@@ -1,0 +1,3 @@
+* docparser stuff
+** parsing system and extracting some info
+(docparser:dump (docparser:parse :alexandria))
