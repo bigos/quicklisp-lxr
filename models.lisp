@@ -28,6 +28,28 @@ divided by ONE delimiter character"
      for r = (slot-value s 'ql-dist:release)
      collect (list z (slot-value r 'ql-dist:system-files))))
 
+(defun mapc-directory-tree (fn directory &key (depth-first-p t))
+  (dolist (entry (cl-fad:list-directory directory))
+    (unless depth-first-p
+      (funcall fn entry))
+    (when (cl-fad:directory-pathname-p entry)
+      (mapc-directory-tree fn entry))
+    (when depth-first-p
+      (funcall fn entry))))
+
+(defun system-folder (system-name)
+  (ql:where-is-system system-name))
+
+(defun recursive-files (system-name)
+  (let ((my-file-list))
+    (mapc-directory-tree
+     (lambda (x) (push x my-file-list))
+     (system-folder system-name))
+    my-file-list))
+
+;; this gives me heap exhausted warning
+;; (xref:xref-file (elt  (check-files :alexandria)3))
+
 
 ;;; finding more
 ;; QUICKLISP-XREF>  (slot-value  (nth 31 (ql:system-list)) 'ql-dist:release)
