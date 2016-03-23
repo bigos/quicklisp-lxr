@@ -50,6 +50,10 @@ divided by ONE delimiter character"
 ;; this gives me heap exhausted warning
 ;; (xref:xref-file (elt  (check-files :alexandria)3))
 
+;; another stack problem
+;; (first (recursive-files :md5))
+
+;;; ==============================================================================
 
 ;;; finding more
 ;; QUICKLISP-XREF>  (slot-value  (nth 31 (ql:system-list)) 'ql-dist:release)
