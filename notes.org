@@ -1,3 +1,20 @@
 * docparser stuff
 ** parsing system and extracting some info
 (docparser:dump (docparser:parse :alexandria))
+* asdf stuff
+(require :asdf)
+
+(asdf:system-source-directory :alexandria)
+#P"/home/jacek/quicklisp/dists/quicklisp/software/alexandria-20150505-git/"
+
+(asdf:system-source-file :alexandria)
+#P"/home/jacek/quicklisp/dists/quicklisp/software/alexandria-20150505-git/alexandria.asd"
+
+(multiple-value-bind (ign res) (asdf:operate 'asdf:load-op 'alexandria) (defparameter *res* res))
+now *res* contains interesting data
+
+this is how we get system object
+(slot-value *res* 'asdf/system:system)
+
+children - list of objects, including files
+(slot-value (slot-value *res* 'asdf/system:system) 'asdf/system::children)
