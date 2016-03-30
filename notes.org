@@ -10,11 +10,48 @@
 (asdf:system-source-file :alexandria)
 #P"/home/jacek/quicklisp/dists/quicklisp/software/alexandria-20150505-git/alexandria.asd"
 
+files of alexandria
 (multiple-value-bind (ign res) (asdf:operate 'asdf:load-op 'alexandria) (defparameter *res* res))
-now *res* contains interesting data
+now *res* contains interesting data in the system object
 
 this is how we get system object
 (slot-value *res* 'asdf/system:system)
 
 children - list of objects, including files
 (slot-value (slot-value *res* 'asdf/system:system) 'asdf/system::children)
+
+files of babel - nested src directory
+(multiple-value-bind (ign res) (asdf:operate 'asdf:load-op 'babel) (defparameter *res* res))
+
+now we have source directory
+(slot-value (slot-value *res* 'asdf/system:system) 'asdf/system::children)
+res >> (#<ASDF/COMPONENT:MODULE "babel" "src">)
+
+and its children
+(slot-value (first (slot-value (slot-value *res* 'asdf/system:system) 'asdf/system::children)) 'asdf/system::children)
+
+inspecting children gives me absolute pathnames to the files
+
+this gives me system object without using *res*
+(slot-value
+(multiple-value-bind (ign res)
+(asdf:operate 'asdf:load-op 'babel)
+(declare (ignore ign)) res)
+'asdf/plan::system)
+
+this gives access to src folder
+(slot-value
+(slot-value
+(multiple-value-bind (ign res) (asdf:operate 'asdf:load-op 'babel) (declare (ignore ign)) res)
+'asdf/plan::system)
+'asdf/system::children)
+
+
+and this will give all files in src directory
+(slot-value
+(first (slot-value
+(slot-value
+(multiple-value-bind (ign res) (asdf:operate 'asdf:load-op 'babel) (declare (ignore ign)) res)
+'asdf/plan::system)
+'asdf/system::children))
+'asdf/system::children)
