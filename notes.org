@@ -55,3 +55,17 @@ and this will give all files in src directory
 'asdf/plan::system)
 'asdf/system::children))
 'asdf/system::children)
+* xref stuff
+** running
+
+make sure relevant package is defined
+(defpackage #:xref (:use #:cl))
+
+load xref
+(load "~/Programming/quicklisp-xref/xref/xref.lisp")
+
+load relevant system
+ (ql:quickload :quicklisp-xref)
+
+run xref
+(xref:xref-file "~/Programming/quicklisp-xref/htmlizer.lisp")
