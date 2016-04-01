@@ -69,3 +69,9 @@ load relevant system
 
 run xref
 (xref:xref-file "~/Programming/quicklisp-xref/htmlizer.lisp")
+
+(xref:display-database :arg)
+where :arg is one of (:FILE :CALLERS :READERS :SETTERS).
+
+getting more info from htmlizer
+(xref:print-caller-trees :root-nodes '(htmlizer))
