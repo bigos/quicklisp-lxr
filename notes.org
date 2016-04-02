@@ -69,3 +69,24 @@ where :arg is one of (:FILE :CALLERS :READERS :SETTERS).
 
 getting more info from htmlizer
 (xref:print-caller-trees :root-nodes '(htmlizer))
+
+readers of a symbol
+(xref:list-readers 'html-path)
+=> (CL-WHO:STR HTMLIZER)
+
+database
+(xref:display-database )
+
+trees
+(xref:print-caller-trees :root-nodes '(htmlizer))
+=> Rooted calling trees:
+  HTMLIZER
+     QL-DIST:ALL-DISTS
+     DIST-HTML-PATH
+        CL-FAD:MERGE-PATHNAMES-AS-FILE
+        QL-DIST:NAME
+     QL-DIST:NAME
+     CL-WHO:WITH-HTML-OUTPUT
+
+more tree info with different symbol
+(xref:print-caller-trees :root-nodes '(cl-who:str))
