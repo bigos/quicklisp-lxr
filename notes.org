@@ -94,3 +94,9 @@ more tree info with different symbol
 * sb-introspect
 (sb-introspect:who-calls (quicklisp-xref::htmlizer))
 goes though every quicklisp package and fails on some errors
+
+interesting blog:
+http://farid.hajji.name/blog/2012/03/29/more-ansi-common-lisp-introspection/
+
+sbcl xref???
+http://web.mit.edu/jhawk/mnt/spo/clisp/src/sbcl-1.0.23-x86-linux/contrib/sb-introspect/xref-test.lisp
