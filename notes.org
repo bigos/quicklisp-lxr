@@ -56,6 +56,7 @@ and this will give all files in src directory
 'asdf/system::children))
 'asdf/system::children)
 * xref stuff
+DEAD END
 ** running
 
 load the system
@@ -90,3 +91,6 @@ trees
 
 more tree info with different symbol
 (xref:print-caller-trees :root-nodes '(cl-who:str))
+* sb-introspect
+(sb-introspect:who-calls (quicklisp-xref::htmlizer))
+goes though every quicklisp package and fails on some errors
