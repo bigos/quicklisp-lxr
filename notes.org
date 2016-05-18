@@ -100,3 +100,15 @@ http://farid.hajji.name/blog/2012/03/29/more-ansi-common-lisp-introspection/
 
 sbcl xref???
 http://web.mit.edu/jhawk/mnt/spo/clisp/src/sbcl-1.0.23-x86-linux/contrib/sb-introspect/xref-test.lisp
+* trivial documentation
+(ql:quickload :trivial-documentation)
+
+
+#+BEGIN_SRC lisp
+(trivial-documentation:symbol-definitions '+)
+# result
+((:KIND :VARIABLE :VALUE (TRIVIAL-DOCUMENTATION:SYMBOL-DEFINITIONS 'DOTIMES)
+  :DOCUMENTATION "the value of the most recent top level READ")
+ (:KIND :FUNCTION :LAMBDA-LIST (&REST SB-KERNEL::NUMBERS) :DOCUMENTATION
+  "Return the sum of its arguments. With no args, returns 0."))
+#+END_SRC
