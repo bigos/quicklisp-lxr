@@ -46,7 +46,6 @@ this gives access to src folder
 'asdf/plan::system)
 'asdf/system::children)
 
-
 and this will give all files in src directory
 (slot-value
 (first (slot-value
@@ -55,6 +54,11 @@ and this will give all files in src directory
 'asdf/plan::system)
 'asdf/system::children))
 'asdf/system::children)
+
+** problem of babel and babel-streams
+sharing same folder
+
+
 * xref stuff
 DEAD END
 ** running
